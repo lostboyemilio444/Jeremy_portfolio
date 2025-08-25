@@ -43,8 +43,8 @@ export default function Navigation() {
   return (
     <>
       {/* Main Navigation Bar */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-background border-b border-border">
-        <div className="flex items-center justify-between px-6 py-3">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-background border-b border-border w-screen">
+        <div className="flex items-center z-50 justify-between px-6 py-3">
           {/* Logo */}
           <Link href="/" className="text-xl font-bold tracking-tight font-oswald">
             JEREMY
@@ -70,7 +70,7 @@ export default function Navigation() {
             </button>
 
             {/* Hamburger Menu Button */}
-            <button
+            {/* <button
               onClick={toggleMenu}
               className="flex flex-col items-center justify-center w-6 h-6 space-y-1"
               aria-label="Toggle menu"
@@ -78,7 +78,7 @@ export default function Navigation() {
               <span className="block w-5 h-0.5 bg-foreground transition-all duration-300"></span>
               <span className="block w-5 h-0.5 bg-foreground transition-all duration-300"></span>
               <span className="block w-5 h-0.5 bg-foreground transition-all duration-300"></span>
-            </button>
+            </button> */}
           </div>
         </div>
       </nav>
