@@ -29,11 +29,11 @@ export default function HeroSection() {
   }, [jobTitles.length])
 
   return (
-    <section className="relative h-screen w-full overflow-hidden">
+    <section className="relative h-screen w-screen overflow-hidden">
       {/* Background Video */}
       <div className="absolute inset-0 z-0">
         <video autoPlay muted loop playsInline className="w-full h-full object-cover">
-          <source src="/placeholder.mp4" type="video/mp4" />
+          <source src="/169-PERFORMANCE_MAIN.mp4" type="video/mp4" />
         </video>
         {/* Dark overlay */}
         <div className="absolute inset-0 bg-black/40"></div>
@@ -44,11 +44,11 @@ export default function HeroSection() {
         <div className="max-w-6xl mx-auto">
           {/* Main Title with Rotating Text */}
           <h1 className="text-white mb-8">
-            <span className="block text-6xl md:text-8xl lg:text-[12rem] xl:text-[14rem] font-black tracking-tighter leading-none mb-4 font-oswald uppercase scroll-animate">
+            <span className="block text-6xl md:text-8xl   font-black tracking-tighter leading-none mb-4 font-oswald uppercase scroll-animate">
               Your future Junior
             </span>
             <span
-              className={`block text-6xl md:text-8xl lg:text-[12rem] xl:text-[14rem] font-black tracking-tighter leading-none font-oswald uppercase transition-opacity duration-300 animate-color-shift text-sky-400 ${
+              className={`block text-6xl md:text-8xl   font-black tracking-tighter leading-none font-oswald uppercase transition-opacity duration-1000  text-sky-400 ${
                 isVisible ? "opacity-100" : "opacity-0"
               }`}
             >
