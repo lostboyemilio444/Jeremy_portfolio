@@ -7,36 +7,40 @@ import AnimatedText from "@/components/animated-text"
 
 export default function HomePage() {
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen w-screen overflow-clip">
       <ScrollAnimations />
       <HeroSection />
 
-      <section id="about" className="min-h-screen pt-20">
-        <div className="px-6 mb-16">
+      <section id="about" className="min-h-screen w-screen pt-20">
+        <div className="flex flex-col px-6 mb-16 w-screen items-center">
           <AnimatedText
             text="ABOUT"
-            className="text-[15vw] md:text-[10vw] font-black tracking-tighter leading-none font-mono"
+            className="text-6xl md:text-8xl font-black tracking-tighter font-oswald uppercase leading-none"
           />
         </div>
         <AboutContent />
       </section>
 
-      <section id="work" className="min-h-screen pt-20">
-        <div className="px-6 mb-16">
+      <section id="work" className="min-h-screen w-screen pt-20">
+       
+
+        
+        <div className="flex flex-col px-6 mb-16 w-screen  items-center">
+          
           <AnimatedText
             text="WORK"
-            className="text-[15vw] md:text-[10vw] font-black tracking-tighter leading-none font-mono"
+            className="text-6xl md:text-8xl font-black tracking-tighter font-oswald uppercase leading-none"
             delay={20}
           />
         </div>
         <WorkSlideshow />
       </section>
 
-      <section id="contact" className="min-h-screen pt-20">
-        <div className="px-6 mb-16">
+      <section id="contact" className="min-h-screen w-screen items-center pt-20">
+        <div className="flex flex-col px-6 mb-16 w-screen items-center">
           <AnimatedText
             text="CONTACT"
-            className="text-[15vw] md:text-[10vw] font-black tracking-tighter leading-none font-mono"
+            className="text-6xl md:text-8xl font-black tracking-tighter font-oswald uppercase leading-none"
             delay={40}
           />
         </div>
