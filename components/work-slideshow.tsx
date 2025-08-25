@@ -3,14 +3,12 @@
 import { useState, useEffect } from "react"
 import Image from "next/image"
 
-
 interface WorkItem {
   id: number
   title: string
   category: string
   description: string
   image: string
-  
   metrics?: string
 }
 
@@ -20,7 +18,7 @@ const workItems: WorkItem[] = [
     title: "LFDY Campaign Video",
     category: "Professional Video",
     description: "High-quality ad campaign created as part of team project",
-    image: "/Feedposts/IMG_4220.jpg",
+    image: "/professional-video-campaign-lfdy.png",
     metrics: "2.3M Views",
   },
   {
@@ -28,7 +26,7 @@ const workItems: WorkItem[] = [
     title: "Viral TikTok Content",
     category: "Personal Creation",
     description: "Self-made TikTok showcasing storytelling and trend editing",
-    image: "/Feedposts/IMG_4221.jpg",
+    image: "/tiktok-viral-content-jeremy.png",
     metrics: "850K Views",
   },
   {
@@ -36,7 +34,7 @@ const workItems: WorkItem[] = [
     title: "Product Photography",
     category: "Ad Content",
     description: "Studio product shots with lifestyle elements",
-    image: "/Peso/Iphone Fotos/Peso schuhe.jpg",
+    image: "/product-photography-studio.png",
     metrics: "Campaign Success",
   },
   {
@@ -44,15 +42,15 @@ const workItems: WorkItem[] = [
     title: "Model Campaign",
     category: "Ad Content",
     description: "Professional model photography for brand campaigns",
-    image: "/Feedposts/IMG_4229.PNG",
+    image: "/model-photography-campaign.png",
     metrics: "Brand Partnership",
   },
   {
     id: 5,
-    title: "Pesoclo Content",
-    category: "Brand Content",
+    title: "Self-Modeling Content",
+    category: "Personal Brand",
     description: "Personal brand content showcasing versatility",
-    image: "/Peso/Iphone Fotos/Vor edm auuto.jpg",
+    image: "/jeremy-self-modeling-campaign.png",
     metrics: "Personal Brand",
   },
   {
@@ -60,7 +58,7 @@ const workItems: WorkItem[] = [
     title: "Instagram Reels",
     category: "Social Media",
     description: "Creative Instagram content with engaging storytelling",
-    image: "/Peso/Iphone Fotos/Peso schuhe auto.jpg",
+    image: "/instagram-reels-creative.png",
     metrics: "High Engagement",
   },
 ]
@@ -90,8 +88,6 @@ export default function WorkSlideshow() {
 
   return (
     <div className="relative w-full overflow-hidden">
-      
-
       <div className="flex items-center justify-center h-[60vh] relative">
         <div className="flex items-center space-x-4 transition-all duration-[2000ms] ease-out">
           {getVisibleItems().map((item, index) => (
