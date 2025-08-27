@@ -9,8 +9,8 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
   useEffect(() => {
     document.body.style.overflow = "hidden";
 
-    const LOADER_DURATION = 22000; // 22 Sekunden
-    const PROGRESS_END = 21000;    // 21 Sekunden bis 100%
+    const LOADER_DURATION = 39000; // 22 Sekunden
+    const PROGRESS_END = 38000;    // 21 Sekunden bis 100%
 
     const startTime = Date.now();
 
