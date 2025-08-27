@@ -54,31 +54,21 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
     const watchVideo = (video: HTMLVideoElement) => {
       total++;
 
-      const tryMarkDone = () => {
-        // Video wird gezählt, sobald es autoplay starten kann
-        if (!video.paused || video.muted) {
-          markDone(video);
-        }
-      };
-
-      // sofort prüfen
-      tryMarkDone();
-
-      // Event Listener: sobald Video abspielt, zählen
-      const onPlay = () => markDone(video);
+      const onPlay = () => markDone(video); // erst hier zählt das Video
       const onErr = () => markDone(video);
 
       video.addEventListener("play", onPlay, { once: true });
       video.addEventListener("error", onErr, { once: true });
 
-      // Autoplay erzwingen, falls möglich
-      if (video.readyState >= 3 && video.paused) {
-        video.muted = true;
-        video.play().catch(() => markDone(video)); // fallback
+      // Autoplay vorbereiten
+      video.muted = true;
+      video.playsInline = true;
+      if (video.paused) {
+        video.play().catch(() => markDone(video)); // fallback bei Autoplay-Block
       }
     };
 
-    // Alle vorhandenen Assets erfassen
+    // Alle vorhandenen Assets initial tracken
     const prime = () => {
       const imgs = Array.from(document.querySelectorAll("img"));
       const vids = Array.from(document.querySelectorAll("video"));
