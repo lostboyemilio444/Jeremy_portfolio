@@ -12,7 +12,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
     document.body.style.overflow = "hidden";
 
     const MIN_DISPLAY = 5000;   // mindestens 5 Sekunden
-    const HARD_TIMEOUT = 30000; // spätestens nach 15 Sekunden
+    const HARD_TIMEOUT = 30000; // spätestens nach 30 Sekunden
 
     const doneSet = new WeakSet<EventTarget>();
     let total = 0;
@@ -53,16 +53,32 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
 
     const watchVideo = (video: HTMLVideoElement) => {
       total++;
-      if (video.readyState >= 3) markDone(video);
-      else {
-        const onReady = () => markDone(video);
-        const onErr = () => markDone(video);
-        video.addEventListener("canplaythrough", onReady, { once: true });
-        video.addEventListener("error", onErr, { once: true });
+
+      const tryMarkDone = () => {
+        // Video wird gezählt, sobald es autoplay starten kann
+        if (!video.paused || video.muted) {
+          markDone(video);
+        }
+      };
+
+      // sofort prüfen
+      tryMarkDone();
+
+      // Event Listener: sobald Video abspielt, zählen
+      const onPlay = () => markDone(video);
+      const onErr = () => markDone(video);
+
+      video.addEventListener("play", onPlay, { once: true });
+      video.addEventListener("error", onErr, { once: true });
+
+      // Autoplay erzwingen, falls möglich
+      if (video.readyState >= 3 && video.paused) {
+        video.muted = true;
+        video.play().catch(() => markDone(video)); // fallback
       }
     };
 
-    // Alle vorhandenen Assets initial erfassen
+    // Alle vorhandenen Assets erfassen
     const prime = () => {
       const imgs = Array.from(document.querySelectorAll("img"));
       const vids = Array.from(document.querySelectorAll("video"));
@@ -96,7 +112,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
       idx = (idx + 1) % texts.length;
     }, 1000);
 
-    // Hard Timeout, falls irgendwas hängt
+    // Hard Timeout
     const killer = window.setTimeout(() => {
       setLoading(false);
       document.body.style.overflow = "";
@@ -112,10 +128,8 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
 
   return (
     <>
-      {/* Kinder rendern, damit Assets laden */}
       {children}
 
-      {/* Vollbild-Overlay für Loader */}
       {loading && (
         <div className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-black text-white">
           <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-white mb-6"></div>
