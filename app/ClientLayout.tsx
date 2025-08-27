@@ -1,83 +1,139 @@
-"use client"
-
-import { useEffect, useState } from "react"
-import Navigation from "@/components/navigation"
-import Footer from "@/components/footer"
+"use client";
+import { useEffect, useRef, useState } from "react";
 
 export default function ClientLayout({ children }: { children: React.ReactNode }) {
-  const [loading, setLoading] = useState(true)
-  const [progress, setProgress] = useState(0)
-  const [statusText, setStatusText] = useState("Loading assets...")
+  const [loading, setLoading] = useState(true);
+  const [progress, setProgress] = useState(0);
+  const [statusText, setStatusText] = useState("Loading pictures...");
+  const startedAt = useRef<number>(0);
 
   useEffect(() => {
-    const images = Array.from(document.querySelectorAll("img"))
-    const videos = Array.from(document.querySelectorAll("video"))
+    startedAt.current = Date.now();
 
-    const total = images.length + videos.length
-    if (total === 0) {
-      setLoading(false)
-      return
-    }
+    // Seite sperren, solange Loader aktiv ist
+    document.body.style.overflow = "hidden";
 
-    let loaded = 0
-    function updateProgress() {
-      loaded++
-      const percent = Math.round((loaded / total) * 100)
-      setProgress(percent)
+    const MIN_DISPLAY = 5000;   // mindestens 5s sichtbar
+    const HARD_TIMEOUT = 15000; // spätestens nach 15s schließen
 
-      // Status text abwechselnd ändern
-      if (loaded % 3 === 1) setStatusText("Loading pictures...")
-      else if (loaded % 3 === 2) setStatusText("Loading videos...")
-      else setStatusText("Loading assets...")
+    // Für doppeltes Zählen absichern
+    const doneSet = new WeakSet<EventTarget>();
+    let total = 0;
+    let done = 0;
 
-      if (loaded >= total) {
-        setTimeout(() => setLoading(false), 500) // kleine Verzögerung
+    const updateProgress = () => {
+      const pct = Math.round((done / Math.max(total, 1)) * 100);
+      setProgress(Math.min(100, pct));
+    };
+
+    const maybeFinish = () => {
+      if (done >= total && total > 0) {
+        const elapsed = Date.now() - startedAt.current;
+        const remaining = Math.max(0, MIN_DISPLAY - elapsed);
+        window.setTimeout(() => {
+          setLoading(false);
+          document.body.style.overflow = "";
+        }, remaining);
       }
-    }
+    };
 
-    images.forEach((img) => {
+    const markDone = (el: EventTarget | null) => {
+      if (!el || doneSet.has(el)) return;
+      doneSet.add(el);
+      done++;
+      updateProgress();
+      maybeFinish();
+    };
+
+    const watchImage = (img: HTMLImageElement) => {
+      total++;
       if (img.complete) {
-        updateProgress()
+        markDone(img);
       } else {
-        img.onload = updateProgress
-        img.onerror = updateProgress
+        img.addEventListener("load", () => markDone(img), { once: true });
+        img.addEventListener("error", () => markDone(img), { once: true });
       }
-    })
+    };
 
-    videos.forEach((video) => {
+    const watchVideo = (video: HTMLVideoElement) => {
+      total++;
       if (video.readyState >= 3) {
-        updateProgress()
+        markDone(video);
       } else {
-        video.oncanplaythrough = updateProgress
-        video.onerror = updateProgress
+        const onReady = () => markDone(video);
+        const onErr = () => markDone(video);
+        video.addEventListener("canplaythrough", onReady, { once: true });
+        video.addEventListener("error", onErr, { once: true });
       }
-    })
+    };
 
-    // Fallback: nach 15s Loader schließen
-    const timeout = setTimeout(() => setLoading(false), 15000)
-    return () => clearTimeout(timeout)
-  }, [])
+    // Initial alle vorhandenen Assets erfassen
+    const prime = () => {
+      const imgs = Array.from(document.querySelectorAll("img"));
+      const vids = Array.from(document.querySelectorAll("video"));
+      imgs.forEach(watchImage);
+      vids.forEach(watchVideo);
+      updateProgress();
+      maybeFinish();
+    };
+    prime();
+
+    // Später hinzugefügte <img>/<video> ebenfalls tracken
+    const mo = new MutationObserver((mutations) => {
+      for (const m of mutations) {
+        m.addedNodes.forEach((node) => {
+          if (node instanceof HTMLImageElement) watchImage(node);
+          else if (node instanceof HTMLVideoElement) watchVideo(node);
+          else if (node instanceof HTMLElement) {
+            node.querySelectorAll("img").forEach((n) => watchImage(n as HTMLImageElement));
+            node.querySelectorAll("video").forEach((n) => watchVideo(n as HTMLVideoElement));
+          }
+        });
+      }
+    });
+    mo.observe(document.documentElement, { childList: true, subtree: true });
+
+    // Rotierender Status-Text
+    const texts = ["Loading pictures...", "Loading videos...", "Loading assets..."];
+    let idx = 0;
+    const textInterval = window.setInterval(() => {
+      setStatusText(texts[idx]);
+      idx = (idx + 1) % texts.length;
+    }, 1000);
+
+    // Hard Timeout (geht immer aus, selbst wenn etwas hängt)
+    const killer = window.setTimeout(() => {
+      setLoading(false);
+      document.body.style.overflow = "";
+    }, HARD_TIMEOUT);
+
+    return () => {
+      mo.disconnect();
+      clearInterval(textInterval);
+      clearTimeout(killer);
+      document.body.style.overflow = "";
+    };
+  }, []);
 
   return (
-    <div>
-      {loading ? (
-        <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black text-white overflow-hidden">
-          <p className="mb-4 text-xl">{statusText}</p>
-          <div className="w-64 bg-gray-700 rounded-full h-3">
+    <>
+      {/* App immer rendern, damit Assets laden können */}
+      {children}
+
+      {/* Vollbild-Overlay darüber legen */}
+      {loading && (
+        <div className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-black text-white">
+          <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-white mb-6"></div>
+          <p className="text-lg mb-4">{statusText}</p>
+          <div className="w-64 h-3 bg-gray-700 rounded-full overflow-hidden">
             <div
-              className="bg-green-500 h-3 rounded-full transition-all duration-300"
+              className="h-full bg-white transition-[width] duration-300"
               style={{ width: `${progress}%` }}
             />
           </div>
           <p className="mt-2 text-sm">{progress}%</p>
         </div>
-      ) : (
-        <>
-          <Navigation />
-          {children}
-          <Footer />
-        </>
       )}
-    </div>
-  )
+    </>
+  );
 }
