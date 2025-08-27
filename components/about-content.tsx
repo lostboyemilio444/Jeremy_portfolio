@@ -92,7 +92,7 @@ export default function AboutContent() {
           </div>
         </div>
         <div className="h-72 mt-10 inset-0 z-0">
-        <video autoPlay muted loop playsInline className="w-full h-full object-cover">
+        <video autoPlay muted loop playsInline preload="auto" className="w-full h-full object-cover">
           <source src="/250224_SWF_LFDY_SPRING_16x9_MAINFILM_V09_ONLINE_H264.mov" type="video/mp4" />
         </video>
         <div className="absolute h-72 mt-10 inset-0 z-10"></div>

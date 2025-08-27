@@ -31,41 +31,41 @@ export default function WorkItem() {
        <AccordionContent className="border-0 ">
           <div className="grid grid-cols-2 md:grid-cols-3 items-center justify-center w-full h-full p-2 rounded-xl gap-2 bg-background">
                <div className="scroll-animate aspect-2/3  rounded-sm overflow-hidden">
-                  <video autoPlay muted loop playsInline className="w-full h-full object-cover">
+                  <video autoPlay muted loop playsInline preload="auto" className="w-full h-full object-cover">
                    <source src="/Eigene-Videos/Flatley-Video.MP4" type="video/mp4" />
                 </video>
                 </div>
            
                  <div className="scroll-animate aspect-2/3 rounded-sm overflow-hidden">
-                  <video autoPlay muted loop playsInline className="w-full h-full object-cover">
+                  <video autoPlay muted loop playsInline preload="auto" className="w-full h-full object-cover">
                    <source src="/250627_LFDY_Mexico_Master_NowOnline_16x9.mov" type="video/mp4" />
                 </video>
                 </div>
 
 
                 <div className="scroll-animate aspect-2/3  rounded-sm overflow-hidden">
-                  <video autoPlay muted loop playsInline className="w-full h-full object-cover">
+                  <video autoPlay muted loop playsInline preload="auto" className="w-full h-full object-cover">
                    <source src="/Eigene-Videos/VHS Mexico recap.MOV" type="video/mp4" />
                 </video>
                 </div>
  <div className="scroll-animate aspect-2/3 rounded-sm overflow-hidden">
-                  <video autoPlay muted loop playsInline className="w-full h-full object-cover">
+                  <video autoPlay muted loop playsInline preload="auto" className="w-full h-full object-cover">
                    <source src="/250224_SWF_LFDY_SPRING_16x9_MAINFILM_V09_ONLINE_H264.mov" type="video/mp4" />
                 </video>
                 </div>
                 <div className="scroll-animate aspect-2/3 rounded-sm overflow-hidden">
-                  <video autoPlay muted loop playsInline className="w-full h-full object-cover">
+                  <video autoPlay muted loop playsInline preload="auto" className="w-full h-full object-cover">
                    <source src="/Eigene-Videos/Size Guide Video.MP4" type="video/mp4" />
                 </video>
                 </div>
 
                 <div className="scroll-animate aspect-2/3 rounded-sm overflow-hidden">
-                  <video autoPlay muted loop playsInline className="w-full h-full object-cover">
+                  <video autoPlay muted loop playsInline preload="auto" className="w-full h-full object-cover">
                    <source src="/Eigene-Videos/Viral Video Performance.MP4" type="video/mp4" />
                 </video>
                 </div>
                   <div className="scroll-animate aspect-2/3 rounded-sm overflow-hidden">
-                  <video autoPlay muted loop playsInline className="w-full h-full object-cover">
+                  <video autoPlay muted loop playsInline preload="auto" className="w-full h-full object-cover">
                    <source src="/169-PERFORMANCE_MAIN.mov" type="video/mp4" />
                 </video>
                 </div>
@@ -117,19 +117,19 @@ export default function WorkItem() {
                 </div>
 
                 <div className="scroll-animate aspect-2/3  rounded-sm overflow-hidden">
-                  <video autoPlay muted loop playsInline className="w-full h-full object-cover">
+                  <video autoPlay muted loop playsInline preload="auto" className="w-full h-full object-cover">
                    <source src="/Peso/TT Videos/Peso Shooting BTS.MOV" type="video/mp4" />
                 </video>
                 </div>
 
                 <div className="scroll-animate aspect-2/3 rounded-sm overflow-hidden">
-                  <video autoPlay muted loop playsInline className="w-full h-full object-cover">
+                  <video autoPlay muted loop playsInline preload="auto" className="w-full h-full object-cover">
                    <source src="/Peso/TT Videos/Peso shooting details.MOV" type="video/mp4" />
                 </video>
                 </div>
 
                 <div className="scroll-animate aspect-2/3 rounded-sm overflow-hidden">
-                  <video autoPlay muted loop playsInline className="w-full h-full object-cover">
+                  <video autoPlay muted loop playsInline preload="auto" className="w-full h-full object-cover">
                    <source src="/Peso/TT Videos/Peso shooting mag gevin.MOV" type="video/mp4" />
                 </video>
                 </div>
@@ -148,7 +148,7 @@ export default function WorkItem() {
  
 
                 <div className="scroll-animate aspect-2/3  rounded-sm overflow-hidden">
-                  <video autoPlay muted loop playsInline className="w-full h-full object-cover">
+                  <video autoPlay muted loop playsInline preload="auto" className="w-full h-full object-cover">
                    <source src="/Peso/TT Videos/Schuhe Peso.mp4" type="video/mp4" />
                 </video>
                 </div>

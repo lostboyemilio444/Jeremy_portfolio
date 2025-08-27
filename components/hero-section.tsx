@@ -32,7 +32,7 @@ export default function HeroSection() {
     <section className="relative h-screen w-screen overflow-hidden">
       {/* Background Video */}
       <div className="absolute inset-0 z-0">
-        <video autoPlay muted loop playsInline className="w-full h-full object-cover">
+        <video autoPlay muted loop playsInline preload="auto" className="w-full h-full object-cover">
           <source src="/169-PERFORMANCE_MAIN.mov" type="video/mp4" />
         </video>
         {/* Dark overlay */}

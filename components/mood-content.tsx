@@ -89,7 +89,7 @@ export default function MoodContent() {
         </div>
         <div className="h-72 mt-10 inset-0 z-0">
           
-        <video autoPlay muted loop playsInline className="w-full h-full object-cover scroll-bottom">
+        <video autoPlay muted loop playsInline preload="auto" className="w-full h-full object-cover scroll-bottom">
           <source src="/250627_LFDY_Mexico_Master_NowOnline_16x9.mov" type="video/mp4" />
         </video>
          <div className="absolute h-72 mt-10 inset-0 z-10"></div>
