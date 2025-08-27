@@ -1,7 +1,14 @@
 @import 'tailwindcss';
+@plugin 'flowbite-react/plugin/tailwindcss';
+@source '../.flowbite-react/class-list.json';
 @import 'tw-animate-css';
+@plugin "flowbite/plugin";
 
 @custom-variant dark (&:is(.dark *));
+
+video {
+  pointer-events: none;
+}
 
 :root {
   --background: oklch(1 0 0);

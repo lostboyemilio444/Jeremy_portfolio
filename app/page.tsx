@@ -4,6 +4,7 @@ import WorkSlideshow from "@/components/work-slideshow"
 import ContactContent from "@/components/contact-content"
 import ScrollAnimations from "@/components/scroll-animations"
 import AnimatedText from "@/components/animated-text"
+import MoodContent from "@/components/mood-content"
 
 export default function HomePage() {
   return (
@@ -11,7 +12,7 @@ export default function HomePage() {
       <ScrollAnimations />
       <HeroSection />
 
-      <section id="about" className="min-h-screen w-screen pt-20">
+      <section id="about" className="min-h-screen w-screen pt-12">
         <div className="flex flex-col px-6 mb-16 w-screen items-center">
           <AnimatedText
             text="ABOUT"
@@ -21,7 +22,7 @@ export default function HomePage() {
         <AboutContent />
       </section>
 
-      <section id="work" className="min-h-screen w-screen pt-20">
+      <section id="work" className="min-h-screen w-screen pt-12">
        
 
         
@@ -35,8 +36,22 @@ export default function HomePage() {
         </div>
         <WorkSlideshow />
       </section>
+       <section id="work" className="min-h-screen w-screen pt-12">
+       
 
-      <section id="contact" className="min-h-screen w-screen items-center pt-20">
+        
+        <div className="flex flex-col px-6 mb-16 w-screen  items-center">
+          
+          <AnimatedText
+            text="MOOD"
+            className="text-6xl md:text-8xl font-black tracking-tighter font-oswald uppercase leading-none"
+            delay={20}
+          />
+        </div>
+        <MoodContent />
+      </section>
+
+      <section id="contact" className="min-h-screen w-screen items-center pt-12">
         <div className="flex flex-col px-6 mb-16 w-screen items-center">
           <AnimatedText
             text="CONTACT"

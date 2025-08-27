@@ -23,7 +23,7 @@ export default function HeroSection() {
         setCurrentTitleIndex((prevIndex) => (prevIndex === jobTitles.length - 1 ? 0 : prevIndex + 1))
         setIsVisible(true)
       }, 300)
-    }, 2500)
+    }, 1500)
 
     return () => clearInterval(interval)
   }, [jobTitles.length])
@@ -33,10 +33,10 @@ export default function HeroSection() {
       {/* Background Video */}
       <div className="absolute inset-0 z-0">
         <video autoPlay muted loop playsInline className="w-full h-full object-cover">
-          <source src="/169-PERFORMANCE_MAIN.mp4" type="video/mp4" />
+          <source src="/169-PERFORMANCE_MAIN.mov" type="video/mp4" />
         </video>
         {/* Dark overlay */}
-        <div className="absolute inset-0 bg-black/40"></div>
+        <div className="absolute inset-0 bg-black/10"></div>
       </div>
 
       {/* Hero Content */}

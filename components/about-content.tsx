@@ -1,22 +1,23 @@
 export default function AboutContent() {
   return (
-    <section className="px-6 py-16">
+    <section className="px-6 py-16" >
+      <script src="../path/to/flowbite/dist/flowbite.min.js"></script>
       <div className="max-w-4xl mx-auto">
         {/* Main Content */}
         <div className="space-y-8 text-base md:text-lg leading-relaxed">
-          <div className="grid md:grid-cols-2 gap-12 items-start p-6 bg-background rounded-2xl">
+          <div className="grid md:grid-cols-2 gap-12 items-start p-6 bg-background rounded-2xl shadow-sm">
             {/* Profile Image Placeholder */}
             <div className="aspect-square bg-muted rounded-2xl overflow-hidden scroll-animate-left">
               <img
                 src="/465387736_1604561207148055_4500114554584912704_n.jpeg"
                 alt="Jeremy Torres Hosp"
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover shadow-sm"
               />
             </div>
 
             {/* Bio Content - Made more compact with tighter spacing */}
             <div className="space-y-4 scroll-animate-right">
-              <p className="text-xl md:text-2xl font-bold leading-tight font-sans">Hey, I'm Jeremy Torres Hosp.</p>
+              <p className="text-xl md:text-2xl font-bold leading-tight font-sans">Hey, I'm Jeremy Torres Hosp. 👋🏽</p>
 
               <p className="text-sm md:text-base">
                 Born and raised in Hamburg, Germany, I've always done things my own way. During the Facebook days, I ran
@@ -42,16 +43,16 @@ export default function AboutContent() {
           {/* Education & Goals - Condensed text */}
           <div className="space-y-4 scroll-animate">
             <p className="text-sm md:text-base">
-              I'm studying <strong>Business Psychology</strong> to understand what really connects with people. My goal:
+              I'm studying  <strong>Business Psychology</strong> to understand what really connects with people. My goal:
               create content that's bold, fresh, and sets new standards.
             </p>
           </div>
 
           {/* Skills Section - More compact grid */}
           <div className="grid md:grid-cols-2 gap-6 mt-12">
-            <div className="scroll-animate-left">
-              <h3 className="text-xl font-bold mb-4 font-sans">Skills & Tools</h3>
-              <div className="space-y-3 text-sm bg-background w-full h-fit rounded-2xl px-7">
+            <div className="scroll-animate-left ">
+              <h3 className="text-xl font-bold mb-4 font-sans">Skills & Tools </h3>
+              <div className="space-y-3 text-sm bg-background w-full h-fit rounded-2xl px-7 shadow-sm">
                 <div className="bg-background  w-full h-fit rounded-sm px-5 pt-5 pb-5">
                   <h4 className="font-semibold mb-1">Video Editing</h4>
                   <p>CapCut, Adobe Premiere Pro, After Effects</p>
@@ -67,19 +68,19 @@ export default function AboutContent() {
               </div>
             </div>
 
-            <div className="scroll-animate-right  ">
+            <div className="scroll-animate-right ">
               <h3 className="text-xl font-bold mb-4  font-sans">Languages</h3>
-              <div className="space-y-2 text-sm bg-background w-full h-fit rounded-sm px-7 pt-5 pb-5">
+              <div className="space-y-2 text-sm bg-background w-full h-fit rounded-sm px-7 pt-5 pb-5 shadow-sm ">
                 <div className="flex justify-between">
-                  <span className="font-semibold">German</span>
+                  <span className="font-semibold">🇩🇪 German </span>
                   <span className="bg-background invert h-full rounded-sm px-5 pt-1 pb-1">Native</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="font-semibold">Spanish</span>
+                  <span className="font-semibold">🇪🇸 Spanish </span>
                   <span className="bg-background invert h-full rounded-sm px-5 pt-1 pb-1">Native</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="font-semibold">English</span>
+                  <span className="font-semibold">🇬🇧 English </span>
                   <span className="bg-background invert h-full rounded-sm px-5 pt-1 pb-1">Fluent</span>
                 </div>
               </div>
@@ -88,11 +89,12 @@ export default function AboutContent() {
         </div>
         <div className="h-72 mt-10 inset-0 z-0">
         <video autoPlay muted loop playsInline className="w-full h-full object-cover">
-          <source src="/250224_SWF_LFDY_SPRING_16x9_MAINFILM_V09_ONLINE_H264.mp4" type="video/mp4" />
+          <source src="/250224_SWF_LFDY_SPRING_16x9_MAINFILM_V09_ONLINE_H264.mov" type="video/mp4" />
         </video>
+        <div className="absolute h-72 mt-10 inset-0 z-10"></div>
         {/* Dark overlay */}
         <div className="absolute inset-0 bg-black/40"></div>
-      </div>
+       </div>
       </div>
     </section>
   )

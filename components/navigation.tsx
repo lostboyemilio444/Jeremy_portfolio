@@ -43,7 +43,7 @@ export default function Navigation() {
   return (
     <>
       {/* Main Navigation Bar */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-background border-b border-border w-screen">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-background   w-screen">
         <div className="flex items-center z-50 justify-between px-6 py-3">
           {/* Logo */}
           <Link href="/" className="text-xl font-bold tracking-tight font-oswald">
@@ -54,8 +54,9 @@ export default function Navigation() {
             {/* Theme Toggle */}
             <button
               onClick={toggleTheme}
-              className="w-8 h-8 rounded-full bg-foreground text-background flex items-center justify-center hover:opacity-80 transition-opacity duration-300"
+              className="w-8 h-8 rounded-full  bg-foreground text-background flex items-center justify-center hover:opacity-80 transition-opacity duration-300"
               aria-label="Toggle theme"
+            
             >
               {theme === "dark" ? (
                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
