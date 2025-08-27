@@ -5,6 +5,11 @@ import "./globals.css"
 import Navigation from "@/components/navigation"
 import Footer from "@/components/footer"
 import { ThemeProvider } from "@/components/theme-provider"
+import ClientLayout from "./clientLayouts"
+
+
+  
+
 
 const oswald = Oswald({
   subsets: ["latin"],
@@ -31,15 +36,20 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  
   return (
     <html lang="en" className={`${oswald.variable} ${inter.variable} antialiased`} suppressHydrationWarning>
       <body className="bg-background text-foreground font-sans">
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
-          <Navigation />
-          {children}
-          <Footer />
+          <ClientLayout>
+            <Navigation />
+            {children}
+            <Footer />
+          </ClientLayout>
         </ThemeProvider>
       </body>
     </html>
   )
 }
+
+

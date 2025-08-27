@@ -93,7 +93,7 @@ export default function Footer() {
           <p className="text-muted-foreground text-sm mb-4 md:mb-0 font-sans">
             COPYRIGHT © 2025 JEREMY TORRES HOSP | ALL RIGHTS RESERVED
           </p>
-          <p className="text-muted-foreground text-sm font-sans">Based in Hamburg, Germany</p>
+          <p className="text-muted-foreground text-sm font-sans">Based in Düsseldorf, Germany</p>
         </div>
       </div>
     </footer>

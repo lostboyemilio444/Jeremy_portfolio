@@ -18,7 +18,7 @@ export default function ContactContent() {
               <a href="mailto:jeremyjob23@gmail.com" className="block w-full text-center">
                 <AnimatedText
                   text=" JEREMYJOB23@GMAIL.COM"
-                  className="text-2xl md:text-4xl lg:text-5xl xl:text-6xl font-black tracking-tight hover:opacity-70 transition-opacity duration-300 font-mono break-all"
+                  className="text-xl md:text-4xl lg:text-5xl xl:text-6xl font-black tracking-tight hover:opacity-70 transition-opacity duration-300 font-mono break-all"
                   delay={10}
                 />
               </a>
@@ -27,14 +27,13 @@ export default function ContactContent() {
               </p>
             </div>
        </div>
-
           <div className="grid lg:grid-cols-2 gap-16">
             {/* Contact Info */}
             <div className="space-y-8">
               <div className="grid md:grid-cols-2 gap-4">
                 <div className="p-6 bg-background rounded-2xl shadow-sm scroll-animate ">
                   <h4 className="font-semibold mb-2 font-mono">Location 📍</h4>
-                  <p className="text-lg">Born in Hamburg. Moved to Cologne for my Job and open to relocate anywhere!</p>
+                  <p className="text-lg">Born in Hamburg. Moved to Düsseldorf for my Job and open to relocate anywhere!</p>
                 </div>
                 <div className="p-6 bg-background rounded-2xl shadow-sm scroll-animate">
                   <h4 className="font-semibold mb-2 font-mono">Response Time ⏰</h4>

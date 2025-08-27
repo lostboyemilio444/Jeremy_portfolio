@@ -15,6 +15,8 @@ export default function AboutContent() {
               />
             </div>
 
+            
+
             {/* Bio Content - Made more compact with tighter spacing */}
             <div className="space-y-4 scroll-animate-right">
               <p className="text-xl md:text-2xl font-bold leading-tight font-sans">Hey, I'm Jeremy Torres Hosp. 👋🏽</p>
@@ -31,6 +33,15 @@ export default function AboutContent() {
             </div>
           </div>
 
+          
+          {/* Education & Goals - Condensed text */}
+          <div className="space-y-4 scroll-animate">
+            <p className="text-sm md:text-base">
+              I'm studying  <strong>Business Psychology</strong> to understand what really connects with people. My goal:
+              create content that's bold, fresh, and sets new standards.
+            </p>
+          </div>
+
           {/* Current Role - More compact layout */}
           <div className="bg-background border border-sky-400 p-6 rounded-2xl scroll-animate">
             <h2 className="text-2xl font-bold mb-4 font-sans">Current Role</h2>
@@ -40,13 +51,6 @@ export default function AboutContent() {
             </p>
           </div>
 
-          {/* Education & Goals - Condensed text */}
-          <div className="space-y-4 scroll-animate">
-            <p className="text-sm md:text-base">
-              I'm studying  <strong>Business Psychology</strong> to understand what really connects with people. My goal:
-              create content that's bold, fresh, and sets new standards.
-            </p>
-          </div>
 
           {/* Skills Section - More compact grid */}
           <div className="grid md:grid-cols-2 gap-6 mt-12">
