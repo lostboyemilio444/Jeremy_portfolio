@@ -1,108 +1,83 @@
 "use client"
+
 import { useEffect, useState } from "react"
-import Navigation from "../components/navigation"
-import Footer from "../components/footer"
-
-function LoadingScreen({ text, progress }: { text: string; progress: number }) {
-  return (
-    <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black text-white">
-      {/* Spinner */}
-      <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-white mb-6"></div>
-
-      {/* Text */}
-      <p className="text-lg mb-4">{text}</p>
-
-      {/* Progress-Bar */}
-      <div className="w-64 h-3 bg-gray-700 rounded-full overflow-hidden">
-        <div
-          className="h-full bg-white transition-all duration-300"
-          style={{ width: `${progress}%` }}
-        />
-      </div>
-      <p className="mt-2 text-sm">{progress}%</p>
-    </div>
-  )
-}
+import Navigation from "@/components/navigation"
+import Footer from "@/components/footer"
 
 export default function ClientLayout({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true)
-  const [loaderText, setLoaderText] = useState("Loading pictures")
   const [progress, setProgress] = useState(0)
+  const [statusText, setStatusText] = useState("Loading assets...")
 
   useEffect(() => {
-    // Scroll sperren während Loading
-    if (loading) {
-      document.body.style.overflow = "hidden"
-    } else {
-      document.body.style.overflow = ""
-    }
-  }, [loading])
-
-  useEffect(() => {
-    const startTime = Date.now()
-    const minDisplay = 5000 // mindestens 5 Sekunden sichtbar
-
-    const images = Array.from(document.images)
+    const images = Array.from(document.querySelectorAll("img"))
     const videos = Array.from(document.querySelectorAll("video"))
 
-    const totalAssets = images.length + videos.length
-    if (totalAssets === 0) {
-      setTimeout(() => setLoading(false), minDisplay)
+    const total = images.length + videos.length
+    if (total === 0) {
+      setLoading(false)
       return
     }
 
-    let loadedCount = 0
-    const checkAllLoaded = () => {
-      loadedCount++
-      const percent = Math.round((loadedCount / totalAssets) * 100)
+    let loaded = 0
+    function updateProgress() {
+      loaded++
+      const percent = Math.round((loaded / total) * 100)
       setProgress(percent)
 
-      if (loadedCount >= totalAssets) {
-        const elapsed = Date.now() - startTime
-        const remaining = minDisplay - elapsed
-        setTimeout(() => setLoading(false), remaining > 0 ? remaining : 0)
+      // Status text abwechselnd ändern
+      if (loaded % 3 === 1) setStatusText("Loading pictures...")
+      else if (loaded % 3 === 2) setStatusText("Loading videos...")
+      else setStatusText("Loading assets...")
+
+      if (loaded >= total) {
+        setTimeout(() => setLoading(false), 500) // kleine Verzögerung
       }
     }
 
-    // Bilder überwachen
-    images.forEach(img => {
+    images.forEach((img) => {
       if (img.complete) {
-        checkAllLoaded()
+        updateProgress()
       } else {
-        img.addEventListener("load", checkAllLoaded, { once: true })
-        img.addEventListener("error", checkAllLoaded, { once: true })
+        img.onload = updateProgress
+        img.onerror = updateProgress
       }
     })
 
-    // Videos überwachen → nur bis sie abspielbereit sind
-    videos.forEach(video => {
+    videos.forEach((video) => {
       if (video.readyState >= 3) {
-        checkAllLoaded()
+        updateProgress()
       } else {
-        video.addEventListener("canplaythrough", checkAllLoaded, { once: true })
-        video.addEventListener("error", checkAllLoaded, { once: true })
+        video.oncanplaythrough = updateProgress
+        video.onerror = updateProgress
       }
     })
-  }, [])
 
-  // Loader-Text wechselt dynamisch
-  useEffect(() => {
-    const texts = ["Loading pictures", "Loading videos", "Loading assets"]
-    let index = 0
-    const interval = setInterval(() => {
-      setLoaderText(texts[index])
-      index = (index + 1) % texts.length
-    }, 1000)
-
-    return () => clearInterval(interval)
+    // Fallback: nach 15s Loader schließen
+    const timeout = setTimeout(() => setLoading(false), 15000)
+    return () => clearTimeout(timeout)
   }, [])
 
   return (
-    <>
-      {loading && <LoadingScreen text={loaderText} progress={progress} />}
-      {!loading && <Navigation />}
-      {children}
-      {!loading && <Footer />}
-    </>
+    <div>
+      {loading ? (
+        <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black text-white overflow-hidden">
+          <p className="mb-4 text-xl">{statusText}</p>
+          <div className="w-64 bg-gray-700 rounded-full h-3">
+            <div
+              className="bg-green-500 h-3 rounded-full transition-all duration-300"
+              style={{ width: `${progress}%` }}
+            />
+          </div>
+          <p className="mt-2 text-sm">{progress}%</p>
+        </div>
+      ) : (
+        <>
+          <Navigation />
+          {children}
+          <Footer />
+        </>
+      )}
+    </div>
   )
 }

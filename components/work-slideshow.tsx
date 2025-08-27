@@ -19,7 +19,7 @@ export default function WorkItem() {
             <div className="bg-background border shadow-sm p-6 rounded-2xl scroll-animate">
            <AccordionTitle className="flex items-center justify-center w-full h-60 border-0">
             <div className="flex flex-col justify-center items-center p-6 rounded-2xl w-full h-full">
-              <Image src="/Logos/LFDY_TM_Logo_weiß.png" alt="TikTok Icon" className="invert dark:invert-0 px-6" width={200} height={80} />
+              <Image src="/Logos/LFDY_TM_Logo_weiß.png" alt="TikTok Icon" className="invert dark:invert-0 px-6" width={200} height={80}  loading="eager"/>
             </div>
             <p className="text-sm md:text-base">
             Content created for <strong>LFDY</strong>, including videos for TikTok and Instagram as well as campaign highlights. <strong>Click to see the work.</strong>
@@ -83,7 +83,7 @@ export default function WorkItem() {
          <div className="bg-background border shadow-sm p-6 rounded-2xl  ">
            <AccordionTitle className="flex items-center justify-center w-full h-60 border-0 ">
             <div className="flex flex-col justify-center items-center p-6 rounded-2xl w-full h-full">
-           <Image src="/Logos/Peso-Eagle_Peso-Mainlogo-black Kopie.png" alt="TikTok Icon" className="invert dark:invert-0 px-6 relative  " width={200} height={80} />
+           <Image src="/Logos/Peso-Eagle_Peso-Mainlogo-black Kopie.png" alt="TikTok Icon" className="invert dark:invert-0 px-6 relative  " width={200} height={80} loading="eager" />
             </div>
             <p className="text-sm md:text-base">
             Content created for <strong>Peso Clothing</strong>, featuring social media edits, collection showcases, and creative visuals. <strong>Click to see the work.</strong>
@@ -112,6 +112,7 @@ export default function WorkItem() {
                     className="w-full h-full object-cover"
                     width={300}
                     height={450}
+                    loading="eager"
                   />
                 </div>
 
@@ -139,6 +140,7 @@ export default function WorkItem() {
                     className="w-full h-full object-cover"
                     width={300}
                     height={450}
+                    loading="eager"
                   />
                 </div>
                
@@ -158,6 +160,7 @@ export default function WorkItem() {
                     className="w-full h-full object-cover"
                     width={300}
                     height={450}
+                    loading="eager"
                   />
                 </div>
                 
