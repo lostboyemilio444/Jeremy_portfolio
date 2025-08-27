@@ -1,23 +1,23 @@
 "use client"
 import { useEffect, useState } from "react"
 
-function LoadingScreen() {
+function LoadingScreen({ text }: { text: string }) {
   return (
     <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black text-white">
       <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-white mb-4"></div>
-      <p className="text-lg">Loading...</p>
+      <p className="text-lg">{text}</p>
     </div>
   )
 }
 
 export default function ClientLayout({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true)
+  const [loaderText, setLoaderText] = useState("Loading pictures")
 
   useEffect(() => {
     const startTime = Date.now()
-    const minDisplay = 5000 // mindestens 5 Sekunden
+    const minDisplay = 1000 // mindestens 5 Sekunden
 
-    // Alle Bilder
     const images = Array.from(document.images)
     const videos = Array.from(document.querySelectorAll("video"))
 
@@ -51,13 +51,11 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
     // Videos überwachen: loaded + play
     videos.forEach(video => {
       const handleReady = () => {
-        // Warten bis Video startet
         if (!video.paused) {
           checkAllLoaded()
         } else {
           video.addEventListener("play", checkAllLoaded, { once: true })
-          // autostart erzwingen falls möglich
-          video.play().catch(() => checkAllLoaded()) 
+          video.play().catch(() => checkAllLoaded())
         }
       }
 
@@ -69,7 +67,6 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
       }
     })
 
-    // Cleanup
     return () => {
       images.forEach(img => {
         img.removeEventListener("load", checkAllLoaded)
@@ -83,9 +80,21 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
     }
   }, [])
 
+  // Wechselnder Text
+  useEffect(() => {
+    const texts = ["Loading pictures", "Loading videos", "Loading assets"]
+    let index = 0
+    const interval = setInterval(() => {
+      setLoaderText(texts[index])
+      index = (index + 1) % texts.length
+    }, 1000) // alle 1 Sekunde wechseln
+
+    return () => clearInterval(interval)
+  }, [])
+
   return (
     <>
-      {loading && <LoadingScreen />}
+      {loading && <LoadingScreen text={loaderText} />}
       {children}
     </>
   )
