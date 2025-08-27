@@ -5,7 +5,7 @@ import "./globals.css"
 import Navigation from "@/components/navigation"
 import Footer from "@/components/footer"
 import { ThemeProvider } from "@/components/theme-provider"
-import ClientLayout from "./clientLayouts"
+import ClientLayout from "./ClientLayout"
 
 
   
