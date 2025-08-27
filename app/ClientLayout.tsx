@@ -9,14 +9,11 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
 
   useEffect(() => {
     startedAt.current = Date.now();
-
-    // Seite sperren, solange Loader aktiv ist
     document.body.style.overflow = "hidden";
 
-    const MIN_DISPLAY = 5000;   // mindestens 5s sichtbar
-    const HARD_TIMEOUT = 15000; // spätestens nach 15s schließen
+    const MIN_DISPLAY = 5000;   // mindestens 5 Sekunden
+    const HARD_TIMEOUT = 30000; // spätestens nach 15 Sekunden
 
-    // Für doppeltes Zählen absichern
     const doneSet = new WeakSet<EventTarget>();
     let total = 0;
     let done = 0;
@@ -47,19 +44,17 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
 
     const watchImage = (img: HTMLImageElement) => {
       total++;
-      if (img.complete) {
-        markDone(img);
-      } else {
-        img.addEventListener("load", () => markDone(img), { once: true });
-        img.addEventListener("error", () => markDone(img), { once: true });
+      if (img.complete) markDone(img);
+      else {
+        img.onload = () => markDone(img);
+        img.onerror = () => markDone(img);
       }
     };
 
     const watchVideo = (video: HTMLVideoElement) => {
       total++;
-      if (video.readyState >= 3) {
-        markDone(video);
-      } else {
+      if (video.readyState >= 3) markDone(video);
+      else {
         const onReady = () => markDone(video);
         const onErr = () => markDone(video);
         video.addEventListener("canplaythrough", onReady, { once: true });
@@ -67,7 +62,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
       }
     };
 
-    // Initial alle vorhandenen Assets erfassen
+    // Alle vorhandenen Assets initial erfassen
     const prime = () => {
       const imgs = Array.from(document.querySelectorAll("img"));
       const vids = Array.from(document.querySelectorAll("video"));
@@ -78,7 +73,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
     };
     prime();
 
-    // Später hinzugefügte <img>/<video> ebenfalls tracken
+    // Später hinzugefügte Assets ebenfalls tracken
     const mo = new MutationObserver((mutations) => {
       for (const m of mutations) {
         m.addedNodes.forEach((node) => {
@@ -101,7 +96,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
       idx = (idx + 1) % texts.length;
     }, 1000);
 
-    // Hard Timeout (geht immer aus, selbst wenn etwas hängt)
+    // Hard Timeout, falls irgendwas hängt
     const killer = window.setTimeout(() => {
       setLoading(false);
       document.body.style.overflow = "";
@@ -117,10 +112,10 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
 
   return (
     <>
-      {/* App immer rendern, damit Assets laden können */}
+      {/* Kinder rendern, damit Assets laden */}
       {children}
 
-      {/* Vollbild-Overlay darüber legen */}
+      {/* Vollbild-Overlay für Loader */}
       {loading && (
         <div className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-black text-white">
           <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-white mb-6"></div>
