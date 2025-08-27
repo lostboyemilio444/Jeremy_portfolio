@@ -16,7 +16,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
 
   useEffect(() => {
     const startTime = Date.now()
-    const minDisplay = 1000 // mindestens 5 Sekunden
+    const minDisplay = 100 // mindestens 5 Sekunden
 
     const images = Array.from(document.images)
     const videos = Array.from(document.querySelectorAll("video"))
