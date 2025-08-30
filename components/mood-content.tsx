@@ -89,9 +89,12 @@ export default function MoodContent() {
         </div>
         <div className="h-72 mt-10 inset-0 z-0">
           
-        <video autoPlay muted loop playsInline preload="auto" className="w-full h-full object-cover scroll-bottom">
-          <source src="/250627_LFDY_Mexico_Master_NowOnline_16x9.mov" type="video/mp4" />
-        </video>
+       <video autoPlay muted loop playsInline preload="auto" className="w-full h-full object-cover scroll-bottom">
+  <source
+    src="https://iqqfdehyquhzzvfjqjqu.supabase.co/storage/v1/object/public/VideoBucket/250627_LFDY_Mexico_Master_NowOnline_16x9.mov"
+    type="video/mp4"
+  />
+</video>
          <div className="absolute h-72 mt-10 inset-0 z-10"></div>
         {/* Dark overlay */}
         <div className="absolute inset-0 bg-black/40"></div>

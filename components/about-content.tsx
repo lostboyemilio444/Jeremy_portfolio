@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export default function AboutContent() {
   return (
     <section className="px-6 py-16" >
@@ -8,11 +10,15 @@ export default function AboutContent() {
           <div className="grid md:grid-cols-2 gap-12 items-start p-6 bg-background rounded-2xl shadow-sm">
             {/* Profile Image Placeholder */}
             <div className="aspect-square bg-muted rounded-2xl overflow-hidden scroll-animate-left">
-              <img
-                src="/465387736_1604561207148055_4500114554584912704_n.jpeg"
-                alt="Jeremy Torres Hosp"
-                className="w-full h-full object-cover shadow-sm"
-              />
+             
+<Image
+  src="/465387736_1604561207148055_4500114554584912704_n.jpeg"
+  alt="Jeremy Torres Hosp"
+  width={800}   // gewünschte Breite angeben
+  height={600}  // gewünschte Höhe angeben
+  className="w-full h-full object-cover shadow-sm"
+  priority // wenn es im sichtbaren Bereich direkt geladen werden soll
+/>
             </div>
 
             
@@ -92,9 +98,24 @@ export default function AboutContent() {
           </div>
         </div>
         <div className="h-72 mt-10 inset-0 z-0">
-        <video autoPlay muted loop playsInline preload="auto" className="w-full h-full object-cover">
-          <source src="/250224_SWF_LFDY_SPRING_16x9_MAINFILM_V09_ONLINE_H264.mov" type="video/mp4" />
-        </video>
+       <div className="h-72 mt-10 inset-0 z-0">
+  <video
+    autoPlay
+    muted
+    loop
+    playsInline
+    preload="none"
+    className="w-full h-full object-cover"
+  >
+    <source
+      src="https://iqqfdehyquhzzvfjqjqu.supabase.co/storage/v1/object/public/VideoBucket/250224_SWF_LFDY_SPRING_16x9_MAINFILM_V09_ONLINE_H264.mov"
+      type="video/mp4"
+    />
+  </video>
+  <div className="absolute h-72 mt-10 inset-0 z-10"></div>
+  {/* Dark overlay */}
+  <div className="absolute inset-0 bg-black/40"></div>
+</div>
         <div className="absolute h-72 mt-10 inset-0 z-10"></div>
         {/* Dark overlay */}
         <div className="absolute inset-0 bg-black/40"></div>

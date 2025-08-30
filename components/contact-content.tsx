@@ -41,18 +41,26 @@ export default function ContactContent() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
-                <div className="aspect-square md:aspect-2/3 bg-muted rounded-2xl overflow-hidden">
-                  <video autoPlay muted loop playsInline className="w-full h-full object-cover">
-                   <source src="/Eigene-Videos/Restock-Videos.MP4" type="video/mp4" />
-                </video>
-                </div>
-                <div className="aspect-square md:aspect-2/3 bg-muted rounded-2xl overflow-hidden">
-                 <video autoPlay muted loop playsInline className="w-full h-full object-cover">
-                   <source src="/Eigene-Videos/Flatley-Video.MP4" type="video/mp4" />
-                </video>
-                <div className="absolute aspect-square md:aspect-2/3 mt-10 inset-0 z-10"></div>
-                </div>
+                 <div className="grid grid-cols-2 gap-4">
+  <div className="aspect-square md:aspect-2/3 bg-muted rounded-2xl overflow-hidden">
+    <video autoPlay muted loop playsInline preload="none" className="w-full h-full object-cover">
+      <source
+        src="https://iqqfdehyquhzzvfjqjqu.supabase.co/storage/v1/object/public/VideoBucket/Restock-Videos.MP4"
+        type="video/mp4"
+      />
+    </video>
+  </div>
+
+  <div className="aspect-square md:aspect-2/3 bg-muted rounded-2xl overflow-hidden relative">
+    <video autoPlay muted loop playsInline preload="none" className="w-full h-full object-cover">
+      <source
+        src="https://iqqfdehyquhzzvfjqjqu.supabase.co/storage/v1/object/public/VideoBucket/Flatley-Video.MP4"
+        type="video/mp4"
+      />
+    </video>
+    <div className="absolute aspect-square md:aspect-2/3 mt-10 inset-0 z-10"></div>
+  </div>
+
               </div>
             </div>
 

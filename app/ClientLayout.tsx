@@ -1,20 +1,47 @@
 "use client";
 import { useEffect, useState } from "react";
 
+type Asset = {
+  url: string;
+  type: "image" | "video";
+};
+
 export default function ClientLayout({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true);
   const [progress, setProgress] = useState(0);
-  const [statusText, setStatusText] = useState("Loading pictures...");
+  const [statusText, setStatusText] = useState("Loading assets...");
+
+  // Assets aus Supabase direkt mit den URLs
+  const assets: Asset[] = [
+    // LFDY Videos
+    { url: "https://iqqfdehyquhzzvfjqjqu.supabase.co/storage/v1/object/public/VideoBucket/Flatley-Video.MP4", type: "video" },
+    { url: "https://iqqfdehyquhzzvfjqjqu.supabase.co/storage/v1/object/public/VideoBucket/250627_LFDY_Mexico_Master_NowOnline_16x9.mov", type: "video" },
+    { url: "https://iqqfdehyquhzzvfjqjqu.supabase.co/storage/v1/object/public/VideoBucket/VHS%20Mexico%20recap.mov", type: "video" },
+    { url: "https://iqqfdehyquhzzvfjqjqu.supabase.co/storage/v1/object/public/VideoBucket/250224_SWF_LFDY_SPRING_16x9_MAINFILM_V09_ONLINE_H264.mov", type: "video" },
+    { url: "https://iqqfdehyquhzzvfjqjqu.supabase.co/storage/v1/object/public/VideoBucket/Size%20Guide%20Video.MP4", type: "video" },
+    { url: "https://iqqfdehyquhzzvfjqjqu.supabase.co/storage/v1/object/public/VideoBucket/Viral%20Video%20Performance.MP4", type: "video" },
+    { url: "https://iqqfdehyquhzzvfjqjqu.supabase.co/storage/v1/object/public/VideoBucket/169-PERFORMANCE_MAIN.mov", type: "video" },
+
+    // Peso Videos
+    { url: "https://iqqfdehyquhzzvfjqjqu.supabase.co/storage/v1/object/public/VideoBucket/Grüne%20Jacke%20Peso.mp4", type: "video" },
+    { url: "https://iqqfdehyquhzzvfjqjqu.supabase.co/storage/v1/object/public/VideoBucket/Peso%20Pearl%20Denim.mp4", type: "video" },
+    { url: "https://iqqfdehyquhzzvfjqjqu.supabase.co/storage/v1/object/public/VideoBucket/Peso%20Shooting%20BTS.MOV", type: "video" },
+    { url: "https://iqqfdehyquhzzvfjqjqu.supabase.co/storage/v1/object/public/VideoBucket/Peso%20shooting%20details.MOV", type: "video" },
+    { url: "https://iqqfdehyquhzzvfjqjqu.supabase.co/storage/v1/object/public/VideoBucket/Peso%20shooting%20mag%20gevin.MOV", type: "video" },
+    { url: "https://iqqfdehyquhzzvfjqjqu.supabase.co/storage/v1/object/public/VideoBucket/Schuhe%20Peso.mp4", type: "video" },
+
+    // Peso Bilder
+    { url: "https://iqqfdehyquhzzvfjqjqu.supabase.co/storage/v1/object/public/ImageBucket/Peso%20schuhe.jpg", type: "image" },
+    { url: "https://iqqfdehyquhzzvfjqjqu.supabase.co/storage/v1/object/public/ImageBucket/Peso%20schuhe%20auto.jpg", type: "image" },
+    { url: "https://iqqfdehyquhzzvfjqjqu.supabase.co/storage/v1/object/public/ImageBucket/Vor%20edm%20auuto.jpg", type: "image" },
+  ];
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
 
-    const LOADER_DURATION = 48000; // 22 Sekunden
-    const PROGRESS_END = 47000;    // 21 Sekunden bis 100%
+    let loadedCount = 0;
+    const total = assets.length;
 
-    const startTime = Date.now();
-
-    // Rotierender Status-Text
     const texts = ["Loading pictures...", "Loading videos...", "Loading assets..."];
     let idx = 0;
     const textInterval = setInterval(() => {
@@ -22,23 +49,32 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
       idx = (idx + 1) % texts.length;
     }, 1000);
 
-    // Progressbar-Update alle 100ms
-    const progressInterval = setInterval(() => {
-      const elapsed = Date.now() - startTime;
-      const pct = Math.min(100, (elapsed / PROGRESS_END) * 100);
-      setProgress(pct);
-    }, 100);
+    const updateProgress = () => {
+      loadedCount++;
+      setProgress(Math.round((loadedCount / total) * 100));
+      if (loadedCount >= total) {
+        setLoading(false);
+        document.body.style.overflow = "";
+      }
+    };
 
-    // Loader nach 22 Sekunden verschwinden lassen
-    const timeout = setTimeout(() => {
-      setLoading(false);
-      document.body.style.overflow = "";
-    }, LOADER_DURATION);
+    assets.forEach((asset) => {
+      if (asset.type === "image") {
+        const img = new Image();
+        img.src = asset.url;
+        img.onload = updateProgress;
+        img.onerror = updateProgress;
+      } else if (asset.type === "video") {
+        const vid = document.createElement("video");
+        vid.src = asset.url;
+        vid.preload = "auto";
+        vid.onloadeddata = updateProgress;
+        vid.onerror = updateProgress;
+      }
+    });
 
     return () => {
       clearInterval(textInterval);
-      clearInterval(progressInterval);
-      clearTimeout(timeout);
       document.body.style.overflow = "";
     };
   }, []);

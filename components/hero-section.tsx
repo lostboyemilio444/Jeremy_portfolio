@@ -20,7 +20,9 @@ export default function HeroSection() {
       setIsVisible(false)
 
       setTimeout(() => {
-        setCurrentTitleIndex((prevIndex) => (prevIndex === jobTitles.length - 1 ? 0 : prevIndex + 1))
+        setCurrentTitleIndex((prevIndex) =>
+          prevIndex === jobTitles.length - 1 ? 0 : prevIndex + 1
+        )
         setIsVisible(true)
       }, 300)
     }, 1500)
@@ -32,8 +34,18 @@ export default function HeroSection() {
     <section className="relative h-screen w-screen overflow-hidden">
       {/* Background Video */}
       <div className="absolute inset-0 z-0">
-        <video autoPlay muted loop playsInline preload="auto" className="w-full h-full object-cover">
-          <source src="/169-PERFORMANCE_MAIN.mov" type="video/mp4" />
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          className="w-full h-full object-cover"
+        >
+          <source
+            src="https://iqqfdehyquhzzvfjqjqu.supabase.co/storage/v1/object/public/VideoBucket/169-PERFORMANCE_MAIN.mov"
+            type="video/mp4"
+          />
         </video>
         {/* Dark overlay */}
         <div className="absolute inset-0 bg-black/10"></div>
@@ -44,11 +56,11 @@ export default function HeroSection() {
         <div className="max-w-6xl mx-auto">
           {/* Main Title with Rotating Text */}
           <h1 className="text-white mb-8">
-            <span className="block text-6xl md:text-8xl   font-black tracking-tighter leading-none mb-4 font-oswald uppercase scroll-animate">
+            <span className="block text-6xl md:text-8xl font-black tracking-tighter leading-none mb-4 font-oswald uppercase scroll-animate">
               Your future Junior
             </span>
             <span
-              className={`block text-6xl md:text-8xl   font-black tracking-tighter leading-none font-oswald uppercase transition-opacity duration-1000  text-sky-400 ${
+              className={`block text-6xl md:text-8xl font-black tracking-tighter leading-none font-oswald uppercase transition-opacity duration-1000 text-sky-400 ${
                 isVisible ? "opacity-100" : "opacity-0"
               }`}
             >
