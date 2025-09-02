@@ -11,7 +11,6 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
   const [progress, setProgress] = useState(0);
   const [statusText, setStatusText] = useState("Loading assets...");
 
-  // Assets aus Supabase direkt mit den URLs
   const assets: Asset[] = [
     // LFDY Videos
     { url: "https://iqqfdehyquhzzvfjqjqu.supabase.co/storage/v1/object/public/VideoBucket/Flatley-Video.MP4", type: "video" },
@@ -49,10 +48,17 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
       idx = (idx + 1) % texts.length;
     }, 1000);
 
+    // Timeout für max. 5 Sekunden
+    const timeout = setTimeout(() => {
+      setLoading(false);
+      document.body.style.overflow = "";
+    }, 5000);
+
     const updateProgress = () => {
       loadedCount++;
       setProgress(Math.round((loadedCount / total) * 100));
       if (loadedCount >= total) {
+        clearTimeout(timeout); // falls früher fertig, Timeout abbrechen
         setLoading(false);
         document.body.style.overflow = "";
       }
@@ -75,6 +81,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
 
     return () => {
       clearInterval(textInterval);
+      clearTimeout(timeout);
       document.body.style.overflow = "";
     };
   }, []);
