@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+
 
 
 
@@ -11,9 +11,6 @@ export default function MoodContent() {
     "https://www.instagram.com/p/DEA-srHuDZy/embed"
     // Füge hier beliebig viele weitere Embed-Links hinzu
   ];
-  useEffect(() => {
-    console.log("Client side effect läuft!");
-  }, []);
 
   return (
     <section className="px-6 py-10">
