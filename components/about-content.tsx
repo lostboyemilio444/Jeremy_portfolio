@@ -12,7 +12,7 @@ export default function AboutContent() {
             <div className="aspect-square bg-muted rounded-2xl overflow-hidden scroll-animate-left">
              
 <Image
-  src="/465387736_1604561207148055_4500114554584912704_n.jpeg"
+  src="/Aboutpicture_Jeremy_Hosp.jpeg"
   alt="Jeremy Torres Hosp"
   width={800}   // gewünschte Breite angeben
   height={600}  // gewünschte Höhe angeben

@@ -5,11 +5,10 @@ import { useEffect } from "react";
 export default function MoodContent() {
 
   const posts = [
-    "https://www.instagram.com/p/DM-C6wrMi8O/embed",
+   "https://www.instagram.com/p/DPyYlzpjCU3/embed",
+    "https://www.instagram.com/p/DOlSdpvjqCC/embed",
     "https://www.instagram.com/p/DNdGaBQsyjD/embed",
-    "https://www.instagram.com/p/DI1IhfbMieY/embed",
-    "https://www.instagram.com/p/DGseWF8MSXY/embed"
-    
+    "https://www.instagram.com/p/DEA-srHuDZy/embed"
     // Füge hier beliebig viele weitere Embed-Links hinzu
   ];
 
